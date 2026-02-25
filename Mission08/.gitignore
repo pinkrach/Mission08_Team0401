@@ -1,0 +1,11 @@
+# Build Folders
+bin/
+obj/
+
+# Rider / JetBrains specific
+.idea/
+*.sln.iml
+*.user
+
+# OS specific
+.DS_Store
