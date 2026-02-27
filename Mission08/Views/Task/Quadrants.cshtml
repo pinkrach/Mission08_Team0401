@@ -1,5 +1,85 @@
-@model IEnumerable<Mission08.Models.TaskItem>
+@model List<Mission08.Models.TaskItem>
 
-<h2>Quadrants</h2>
+@{
+    ViewData["Title"] = "Quadrants";
+}
 
-<p>Quadrants view coming soon...</p>
+<h1 class="mb-4">Task Quadrants</h1>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header fw-bold">Quadrant 1 (Important / Urgent)</div>
+            <div class="card-body">
+                @foreach (var t in Model.Where(x => x.Quadrant == 1))
+                {
+                    <div class="border rounded p-2 mb-2">
+                        <div class="fw-bold">@t.TaskName</div>
+                        <div class="small text-muted">Due: @(t.DueDate?.ToString("yyyy-MM-dd") ?? "None")</div>
+                        <div class="mt-2">
+                            <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@t.TaskId">Edit</a>
+                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@t.TaskId">Delete</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header fw-bold">Quadrant 2 (Important / Not Urgent)</div>
+            <div class="card-body">
+                @foreach (var t in Model.Where(x => x.Quadrant == 2))
+                {
+                    <div class="border rounded p-2 mb-2">
+                        <div class="fw-bold">@t.TaskName</div>
+                        <div class="small text-muted">Due: @(t.DueDate?.ToString("yyyy-MM-dd") ?? "None")</div>
+                        <div class="mt-2">
+                            <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@t.TaskId">Edit</a>
+                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@t.TaskId">Delete</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header fw-bold">Quadrant 3 (Not Important / Urgent)</div>
+            <div class="card-body">
+                @foreach (var t in Model.Where(x => x.Quadrant == 3))
+                {
+                    <div class="border rounded p-2 mb-2">
+                        <div class="fw-bold">@t.TaskName</div>
+                        <div class="small text-muted">Due: @(t.DueDate?.ToString("yyyy-MM-dd") ?? "None")</div>
+                        <div class="mt-2">
+                            <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@t.TaskId">Edit</a>
+                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@t.TaskId">Delete</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header fw-bold">Quadrant 4 (Not Important / Not Urgent)</div>
+            <div class="card-body">
+                @foreach (var t in Model.Where(x => x.Quadrant == 4))
+                {
+                    <div class="border rounded p-2 mb-2">
+                        <div class="fw-bold">@t.TaskName</div>
+                        <div class="small text-muted">Due: @(t.DueDate?.ToString("yyyy-MM-dd") ?? "None")</div>
+                        <div class="mt-2">
+                            <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@t.TaskId">Edit</a>
+                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@t.TaskId">Delete</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,41 +3,39 @@ using Mission08.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// MVC
 builder.Services.AddControllersWithViews();
 
+// DbContext (SQLite)
 builder.Services.AddDbContext<TasksContext>(options =>
-{
-    options.UseSqlite(builder.Configuration.GetConnectionString("TasksConnection"));
-});
+    options.UseSqlite(builder.Configuration.GetConnectionString("TasksConnection"))
+);
 
+// Repository pattern DI
 builder.Services.AddScoped<ITasksRepository, EFTasksRepository>();
-
 
 var app = builder.Build();
 
+// Seed DB (if your SeedData has this method)
 SeedData.EnsurePopulated(app);
 
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
-
+// Default route — send users straight to Quadrants
 app.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
-
+    name: "default",
+    pattern: "{controller=Task}/{action=Quadrants}/{id?}"
+);
 
 app.Run();
